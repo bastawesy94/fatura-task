@@ -1,14 +1,15 @@
-import { UserService } from "../service/UserService";
+import { IPermissionDTO } from "../dto/PermissionDTO";
+import { PermissionService } from "../service/PermissionService";
 import express, { Router } from 'express';
-const usersRouter = express.Router();
-const userSerivce = new UserService();
+const permissionsRouter = express.Router();
+const permissionSerivce = new PermissionService();
 
-usersRouter.get('/users', async (req, res) => {
+permissionsRouter.get('/permissions', async (req, res) => {
     try {
-        const allUsers = await userSerivce.getAllUsers();
+        const allPermissions = await permissionSerivce.getAllPermissions();
         return res.send({
             status: 200,
-            users: allUsers
+            permissions: allPermissions
         })
     }
     catch (err) {
@@ -16,4 +17,18 @@ usersRouter.get('/users', async (req, res) => {
     }
 });
 
-export default usersRouter;
+permissionsRouter.post('/permissions', async (req, res) => {
+    try {
+        const permission:IPermissionDTO = req.body;
+        await permissionSerivce.createPermission(permission);
+        return res.send({
+            status: 200,
+            message: "Permission is created."
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+
+export default permissionsRouter;

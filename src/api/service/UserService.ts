@@ -13,7 +13,7 @@ export class UserService {
     }
     async createUser(user: IUserDTO) {
         const encryprion = new Encryprion();
-        const encryptedPassword = encryprion.encrypt(user.password);
+        const encryptedPassword = Encryprion.encrypt(user.password);
         user.password = encryptedPassword;
         return await this.userRepo.create(user);
     }

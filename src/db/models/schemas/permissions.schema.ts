@@ -2,11 +2,11 @@ import { DataTypes, sequelize } from "../../connection";
 
 const PermissionSchema = sequelize.define("permissions", {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
-    name: {
+    permission_name: {
         type: DataTypes.STRING(50),
         allowNull: false,
     },

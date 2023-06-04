@@ -1,11 +1,10 @@
 import { DataTypes, sequelize } from "../../connection";
-import PermissionSchema from "./permissions.schema";
 
 const RoleSchema = sequelize.define("roles", {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     role_name: {
         type: DataTypes.STRING(50),
@@ -22,5 +21,4 @@ const RoleSchema = sequelize.define("roles", {
         allowNull: false,
     },
 });
-RoleSchema.belongsTo(PermissionSchema);
 export default RoleSchema;
