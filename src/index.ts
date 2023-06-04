@@ -6,11 +6,21 @@ import rolesRouter from './api/controller/RoleController';
 import permissionsRouter from './api/controller/PermissionController';
 import userRolesRouter from './api/controller/UserRoleController';
 dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
-
+const session = require('express-session');
 const port = process.env.PORT;
 const bodyParser = require('body-parser');
 const app: Express = express();
 
+// configure session middleware
+const sessionMiddleware = session({
+    secret: 'my-secret-key',
+    resave: false,
+    saveUninitialized: true
+  });
+  
+  // use session middleware
+  app.use(sessionMiddleware);
+  
 app.use(bodyParser.json());
 app.use(usersRouter);
 app.use(rolesRouter);

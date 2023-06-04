@@ -1,5 +1,10 @@
 export interface IUserDTO{
-    userName:string;
+    user_name:string;
     password:string;
     email:string;
+}
+
+export interface IGetUserDTO{
+    user_name:string;
+    password:string;
 }
