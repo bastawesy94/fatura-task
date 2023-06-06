@@ -39,7 +39,7 @@ app.get('/status', (req: Request, res: Response) => {
 app.listen(port, async () => {
     const promisedExcec = promisify(exec);
     await connectDB();
-    // await promisedExcec('npm run create');
-    // await promisedExcec('npm run migrate');
+    await promisedExcec('npm run create');
+    await promisedExcec('npm run migrate');
     console.log(`Listining on ==> ${port}`);
 });
