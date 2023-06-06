@@ -19,6 +19,6 @@ export class PermissionRepository {
         // return this.permissionSchema.findAll({
         //      where: { role_id:roleId }
         // });
-        return sequelize.query(`select * from permissions where role_id = ${roleId};`)
+        return sequelize.query(`select * from permissions where role_id = ${roleId};`, {raw:true, mapToModel: true, model: PermissionSchema})
     }
 }

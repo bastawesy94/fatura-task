@@ -11,19 +11,29 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' }
+        references: {
+          model: {
+            tableName: 'users',
+          }, key: 'id'
+        }
       },
       role_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'roles', key: 'id' }
+        references: {
+          model: {
+            tableName: 'roles',
+          }, key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'created_at'
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'updated_at'
       }
     });
   },

@@ -5,7 +5,7 @@ const UserSchema = sequelize.define("users", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement:true
+    autoIncrement: true
   },
   user_name: {
     type: DataTypes.STRING(100),
@@ -24,11 +24,13 @@ const UserSchema = sequelize.define("users", {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     allowNull: false,
+    field: 'created_at'
   },
   updatedAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     allowNull: false,
+    field: 'updated_at'
   },
 });
 UserSchema.hasOne(UserRoleShema);

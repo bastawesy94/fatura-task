@@ -14,11 +14,13 @@ const RoleSchema = sequelize.define("roles", {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false,
+        field:'created_at'
     },
     updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false,
+        field:'updated_at'
     },
 });
 export default RoleSchema;

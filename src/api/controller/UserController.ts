@@ -71,8 +71,10 @@ usersRouter.post('/authorize/:permission', authenticateJWT, async (req: any, res
         const userDetails = await userSerivce.isAutorized(req.user);
         console.log("userDetails ==> ",userDetails)
         const permissions= await permissionService.findByRoleId(userDetails.role_id);
-        for(let permission of permissions){
-            if(permissionName == permission.permission_name){
+        console.log("incomming param permissionName => ",permissionName);
+        for(let permissionIndex in permissions){
+            console.log("permission obj => ",permissions[permissionIndex]);
+            if(permissionName == permissions[permissionIndex].permission_name){
                 return res.send({
                     status: 200,
                     message: "Autorized",

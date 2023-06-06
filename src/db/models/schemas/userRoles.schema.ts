@@ -1,12 +1,6 @@
 import { DataTypes, sequelize } from "../../connection";
-import UserSchema from "./users.schema";
 
 const UserRoleShema = sequelize.define("users_roles", {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
     user_id: {
         type: DataTypes.INTEGER,
     },
@@ -17,12 +11,16 @@ const UserRoleShema = sequelize.define("users_roles", {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false,
+        field:'created_at'
     },
     updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false,
+        field:'updated_at'
     },
-});
+},
+    { underscored: true, tableName: 'users_roles',timestamps: true }
+);
 
 export default UserRoleShema;

@@ -11,6 +11,7 @@ export class UserRoleService {
         return await this.userRoleRepo.findAll();
     }
     async createUserRole(userRole: IUserRoleDTO) {
+        console.log("userRole =>",userRole)
         return await this.userRoleRepo.create(userRole);
     }
 }
