@@ -23,3 +23,4 @@ it's better to split controller and routes
 I tried to obligate with clean arch as much as possible with my time and everything be dockerized 
 services needs validation and writing unit tests cases
 ```
+![1](https://github.com/bastawesy94/fatura-task/assets/19712028/d845eaef-aa4f-4697-8744-ce0f7daf18d5)
