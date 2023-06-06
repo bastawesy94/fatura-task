@@ -3,7 +3,7 @@
     "username": "slickuser",
     "password": "slickpass",
     "database": "fatura",
-    "host": "localhost",
+    "host": "db",
     "dialect": "postgres"
   }
 }
