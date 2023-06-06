@@ -23,4 +23,5 @@ it's better to split controller and routes
 I tried to obligate with clean arch as much as possible with my time and everything be dockerized 
 services needs validation and writing unit tests cases
 ```
-![1](https://github.com/bastawesy94/fatura-task/assets/19712028/d845eaef-aa4f-4697-8744-ce0f7daf18d5)
+ERD Diagarm
+![Selection_056](https://github.com/bastawesy94/fatura-task/assets/19712028/e081d8cc-427d-423b-9572-c33ee8d5c14c)
