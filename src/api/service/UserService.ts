@@ -20,11 +20,17 @@ export class UserService {
         const retrievedUser = await this.userRepo.findOne(user);
         const decryptedPassword = Encryprion.dencrypt(retrievedUser.password);
         if (decryptedPassword === user.password)
-            return { user: retrievedUser, isAuth: true };
+            return { user: retrievedUser.dataValues, isAuth: true };
         return { isAuth: false };
     }
     async findUserById(userId: number) {
         const retrievedUser = await this.userRepo.findById(userId);
         return retrievedUser;
+    }
+
+    async isAutorized(user:any){
+        const userDtails = await this.userRepo.getUserDetails(user.id);
+        console.log("userDtails => ",userDtails);
+        return userDtails[0][0];
     }
 }

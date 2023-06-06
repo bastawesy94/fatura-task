@@ -1,4 +1,5 @@
 import { DataTypes, sequelize } from "../../connection";
+import UserRoleShema from "./userRoles.schema";
 
 const UserSchema = sequelize.define("users", {
   id: {
@@ -30,5 +31,6 @@ const UserSchema = sequelize.define("users", {
     allowNull: false,
   },
 });
+UserSchema.hasOne(UserRoleShema);
 
 export default UserSchema;

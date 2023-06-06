@@ -1,5 +1,5 @@
 import { Model, ModelCtor } from "sequelize-typescript";
-import UserRolesSchema from "../../db/models/schemas/UserRoles.schema";
+import UserRolesSchema from "../../db/models/schemas/userRoles.schema";
 import { IUserRoleDTO } from "../dto/UserRoleDTO";
 
 export class UserRoleRepository {

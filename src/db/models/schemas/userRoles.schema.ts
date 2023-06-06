@@ -1,6 +1,7 @@
 import { DataTypes, sequelize } from "../../connection";
+import UserSchema from "./users.schema";
 
-const RoleShema = sequelize.define("users_roles", {
+const UserRoleShema = sequelize.define("users_roles", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -24,4 +25,4 @@ const RoleShema = sequelize.define("users_roles", {
     },
 });
 
-export default RoleShema;
+export default UserRoleShema;

@@ -13,4 +13,8 @@ export class PermissionService {
     async createPermission(permission: IPermissionDTO) {
         return await this.permissionRepo.create(permission);
     }
+
+    async findByRoleId (id:number){
+        return await this.permissionRepo.findByRoleId(id);
+    }
 }

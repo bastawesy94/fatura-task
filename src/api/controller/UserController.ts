@@ -1,9 +1,13 @@
 import { IGetUserDTO, IUserDTO } from "../dto/UserDTO";
 import { UserService } from "../service/UserService";
+import jwt from "jsonwebtoken";
+import { Request, Response } from "express";
 import express, { Router } from 'express';
+import { authenticateJWT } from "../../utils/AuthMiddleware";
+import { PermissionService } from "../service/PermissionService";
 const usersRouter = express.Router();
 const userSerivce = new UserService();
-
+const permissionService = new PermissionService();
 usersRouter.get('/users', async (req, res) => {
     try {
         const allUsers = await userSerivce.getAllUsers();
@@ -31,17 +35,23 @@ usersRouter.post('/users', async (req, res) => {
     }
 });
 
-usersRouter.post('/login', async (req: any, res) => {
+usersRouter.post('/login', async (req: any, res: Response) => {
     try {
         // check if the username and password are valid
         const user: IGetUserDTO = req.body;
         const authResult = await userSerivce.isAuth(user);
         if (authResult.isAuth) {
+            const payload = authResult.user; // Replace with your own payload data
+            const secret = process.env.JWT_SECRET!; // Replace with your own secret key
+            const options = { expiresIn: process.env.JWT_EXPIRATION_TIME }; // Replace with your own token expiration time
+            const token = jwt.sign(payload, secret, options);
+
             // set the user session
             req.session.user = { id: authResult.user.id };
             res.send({
                 status: 200,
-                message: "User is Authenticated!"
+                message: "User is Authenticated!",
+                token
             });
         } else {
             res.send({
@@ -55,9 +65,35 @@ usersRouter.post('/login', async (req: any, res) => {
     }
 });
 
+usersRouter.post('/authorize/:permission', authenticateJWT, async (req: any, res: Response) => {
+    try{
+        const permissionName = req.params.permission;
+        const userDetails = await userSerivce.isAutorized(req.user);
+        console.log("userDetails ==> ",userDetails)
+        const permissions= await permissionService.findByRoleId(userDetails.role_id);
+        for(let permission of permissions){
+            if(permissionName == permission.permission_name){
+                return res.send({
+                    status: 200,
+                    message: "Autorized",
+                });
+            }
+        }
+        return res.send({
+            status: 401,
+            message: "not Autorized",
+        });
+    }catch(err){
+        console.log("ERR= >",err);
+    }
+});
+
 // create a route to destroy a specific user session
-usersRouter.post('/logout/:userId', (req:any, res) => {
-    console.log("req.session -> ",req.session);
+
+//TODO controllers move to another folder
+usersRouter.post('/logout/:userId', (req: any, res) => {
+    //@TODO get jwt from header and destroy the session 
+    console.log("req.session -> ", req.session);
     const userId = parseInt(req.params.userId);
     if (req.session.user && req.session.user.id === userId) {
         // destroy the user session
@@ -67,5 +103,7 @@ usersRouter.post('/logout/:userId', (req:any, res) => {
         res.status(401).send('Unauthorized');
     }
 });
+
+//autorized endpoint
 
 export default usersRouter;

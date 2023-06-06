@@ -7,7 +7,7 @@ const sequelize = new Sequelize(POSTGRES_URL!);
 async function connectDB() {
   try {
     await sequelize.sync(); //test connection
-    console.log("✅ Connection has been established successfully.");
+    console.log("✅ Connection has been established.");
   }
   catch (err: any) {
     console.log(err);

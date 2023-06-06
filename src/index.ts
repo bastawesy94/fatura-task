@@ -5,6 +5,8 @@ import usersRouter from './api/controller/UserController';
 import rolesRouter from './api/controller/RoleController';
 import permissionsRouter from './api/controller/PermissionController';
 import userRolesRouter from './api/controller/UserRoleController';
+const { exec } = require('child_process');
+import { promisify } from 'util';
 dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
 const session = require('express-session');
 const port = process.env.PORT;
@@ -16,11 +18,10 @@ const sessionMiddleware = session({
     secret: 'my-secret-key',
     resave: false,
     saveUninitialized: true
-  });
-  
-  // use session middleware
-  app.use(sessionMiddleware);
-  
+});
+
+// use session middleware
+app.use(sessionMiddleware);
 app.use(bodyParser.json());
 app.use(usersRouter);
 app.use(rolesRouter);
@@ -36,5 +37,9 @@ app.get('/status', (req: Request, res: Response) => {
 });
 
 app.listen(port, async () => {
+    const promisedExcec = promisify(exec);
     await connectDB();
+    // await promisedExcec('npm run create');
+    // await promisedExcec('npm run migrate');
+    console.log(`Listining on ==> ${port}`);
 });

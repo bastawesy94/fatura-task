@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: slickuser
+      POSTGRES_PASSWORD: slickpass
+      POSTGRES_DB: fatura
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    restart: always
+    environment:
+      PORT: 8000
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: slickuser
+      POSTGRES_PASSWORD: slickpass
+      POSTGRES_DB: fatura
+      DATABASE_URL: postgresql://slickuser:slickpass@db:5432/fatura?schema=public
+      CRYPTO_KEY: U2FsdGVkX18iI0gLaeQmf2z7Ev82hMynTo1c2TkCCJo=
+      POSTGRES_DIALICT: postgres
+
+    volumes:
+      - app-code:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db  
+
+volumes:
+  db-data:
+  app-code:
