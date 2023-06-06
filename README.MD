@@ -7,6 +7,7 @@ To get started with service
     ```
       docker-compose up
     ```
+and you can import postman collection which is attached in the email
 hints:
 ```
 nodejs service is rinning on 8000 
