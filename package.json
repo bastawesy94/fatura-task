@@ -9,7 +9,6 @@
     "build": "tsc",
     "start": "node ./dist/src/index.js",
     "start:nodemon": "npm run build && ./node_modules/nodemon/bin/nodemon.js",
-    "login": "aws codeartifact login --tool npm --repository ucx-repo --domain tactful --domain-owner 409160330780 --region eu-west-1",
     "test": "npm run jest",
     "create": "sequelize db:create",
     "drop": "sequelize db:drop",
